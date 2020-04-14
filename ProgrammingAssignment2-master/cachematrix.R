@@ -1,9 +1,9 @@
-## the first function, makeCaacheMatrix creates a special "matrix", which is really a list containing a function to
+## The first function, makeVector creates a special "vector", which is really a list containing a function to
 
-# 1.set the value of the matrix
-# 2.get the value of the matrix
-# 3.set the value of the inverse
-# 4.get the value of the inverse
+# 1. set the value of the vector
+# 2. get the value of the vector
+# 3. set the value of the mean
+# 4. get the value of the mean
 
 makeCacheMatrix <- function(x = matrix()) {
   m <- NULL
@@ -12,20 +12,16 @@ makeCacheMatrix <- function(x = matrix()) {
     m <<- NULL
   }
   get <- function() x
-  setinverse <- function(inverse) m <<- inverse
+  setinverse <- function(matrix) m <<- solve
   getinverse <- function() m
   list(set = set, get = get,
        setinverse = setinverse,
        getinverse = getinverse)
+
 }
 
-
-
-
-
 ## This function computes the inverse of the special "matrix" 
-## returned by makeCacheMatrix above. 
-
+## returned by makeCacheMatrix above.
 
 cacheSolve <- function(x, ...) {
   m <- x$getinverse()
@@ -34,8 +30,7 @@ cacheSolve <- function(x, ...) {
     return(m)
   }
   data <- x$get()
-  m <- inverse(data, ...)
+  m <- solve(data, ...)
   x$setinverse(m)
   m
-        
 }
